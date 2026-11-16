@@ -1,0 +1,93 @@
+{
+  "name": "dsh-codex-default-workspace",
+  "version": "1.0.0",
+  "description": "仿照 Codex 无项目会话：默认工作区中的新会话自动进入按日期分组的独立文件夹（YYYY-MM-DD/会话ID），实现文件与目录隔离。 · Codex-style project-free sessions for DSH: automatically isolate each new chat in the default workspace into a date-grouped folder (YYYY-MM-DD/session-id).",
+  "license": "MIT",
+  "author": "HelloWorldGitHub114",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HelloWorldGitHub114/dsh-codex-default-workspace.git"
+  },
+  "homepage": "https://github.com/HelloWorldGitHub114/dsh-codex-default-workspace#readme",
+  "bugs": {
+    "url": "https://github.com/HelloWorldGitHub114/dsh-codex-default-workspace/issues"
+  },
+  "keywords": [
+    "deepseek",
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "codex",
+    "codex-style",
+    "workspace",
+    "default-workspace",
+    "working-directory",
+    "cwd",
+    "session",
+    "session-folder",
+    "session-directory",
+    "project-free",
+    "isolation",
+    "work-outputs",
+    "默认工作区",
+    "默认文件夹",
+    "会话目录",
+    "对话目录",
+    "会话文件夹",
+    "对话文件夹",
+    "独立目录",
+    "独立文件夹",
+    "日期目录",
+    "日期文件夹",
+    "子目录",
+    "子文件夹",
+    "会话隔离",
+    "目录隔离",
+    "文件隔离",
+    "无项目",
+    "临时会话",
+    "临时对话",
+    "工作目录"
+  ],
+  "type": "module",
+  "main": "./index.js",
+  "icon": "./icon.svg",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.en.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-context-menu",
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ]
+    }
+  }
+}

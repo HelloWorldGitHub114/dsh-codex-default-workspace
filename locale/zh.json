@@ -1,0 +1,1 @@
+{ "meta": { "title": "Codex 式默认工作区", "description": "仿照 Codex 的无项目会话：默认工作区中的每段新会话在首次运行时自动创建按日期分组的独立目录（默认工作区/YYYY-MM-DD/会话ID），并通过 DSH 原生工作目录事件切换进入，使文件工具、cd 命令、相对路径链接、右侧文件树以及模型和子代理上下文保持一致，同时会话仍归属在默认工作区下。默认开启 work/ 与 outputs/ 目录结构（可在设置中关闭）；非默认设置保存于 ~/.dsh/storages/codex-default-workspace.json，支持一键清理与恢复默认，停用或卸载后历史会话仍保留各自目录与文件。", "detail": "README.md" } }

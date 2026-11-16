@@ -1,0 +1,3 @@
+- insert:
+    - id: codex-default-workspace
+      name: dsh-codex-default-workspace
