@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" fill="none">
+  <rect x="0.5" y="0.5" width="1199" height="329" rx="18" fill="#141416" stroke="#2b2b30"/>
+
+  <!-- Header -->
+  <text x="40" y="42" fill="#fafafa" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600">工作原理：100% 走 DSH 原生工作目录事件</text>
+  <text x="1160" y="42" text-anchor="end" fill="#8e8e98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13">不修改 session.header.cwd，不劫持工具链，卸载后历史会话依旧完整</text>
+
+  <!-- Step 1 -->
+  <g transform="translate(40, 74)">
+    <rect x="0" y="0" width="244" height="148" rx="13" fill="#1b1b1f" stroke="#2f2f36"/>
+    <rect x="16" y="16" width="54" height="22" rx="11" fill="#27272d"/>
+    <text x="43" y="31" text-anchor="middle" fill="#e4e4e7" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11" font-weight="600">STEP 1</text>
+    <text x="16" y="64" fill="#fafafa" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="600">默认工作区新建会话</text>
+    <text x="16" y="90" fill="#9a9aa4" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12.5">
+      <tspan x="16" dy="0">仅匹配默认工作区中</tspan>
+      <tspan x="16" dy="20">尚未执行过的新主会话</tspan>
+      <tspan x="16" dy="20" fill="#71717a">老会话与其他项目直接跳过</tspan>
+    </text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <path d="M294 148h26m0 0l-6-6m6 6l-6 6" stroke="#71717a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Step 2 -->
+  <g transform="translate(332, 74)">
+    <rect x="0" y="0" width="256" height="148" rx="13" fill="#1b1b1f" stroke="#2f2f36"/>
+    <rect x="16" y="16" width="54" height="22" rx="11" fill="#27272d"/>
+    <text x="43" y="31" text-anchor="middle" fill="#e4e4e7" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11" font-weight="600">STEP 2</text>
+    <text x="16" y="64" fill="#fafafa" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="600">首次访问时自动建目录</text>
+    <text x="16" y="90" fill="#9a9aa4" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12.5">
+      <tspan x="16" dy="0">监听 working-directory/access</tspan>
+      <tspan x="16" dy="20">在磁盘创建 YYYY-MM-DD/&lt;id&gt;/</tspan>
+      <tspan x="16" dy="20" fill="#71717a">默认同时建立 work/ 与 outputs/</tspan>
+    </text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <path d="M598 148h26m0 0l-6-6m6 6l-6 6" stroke="#71717a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Step 3 -->
+  <g transform="translate(636, 74)">
+    <rect x="0" y="0" width="248" height="148" rx="13" fill="#1b1b1f" stroke="#3c3c46"/>
+    <rect x="16" y="16" width="54" height="22" rx="11" fill="#fafafa"/>
+    <text x="43" y="31" text-anchor="middle" fill="#141416" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11" font-weight="700">STEP 3</text>
+    <text x="16" y="64" fill="#fafafa" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="600">写入原生目录切换事件</text>
+    <text x="16" y="90" fill="#d4d4d8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12.5">
+      <tspan x="16" dy="0">追加 working-directory/change</tspan>
+      <tspan x="16" dy="20" fill="#9a9aa4">将后续逻辑完全交还给</tspan>
+      <tspan x="16" dy="20" fill="#9a9aa4">DSH 原生 WorkingDirectory</tspan>
+    </text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <path d="M894 148h26m0 0l-6-6m6 6l-6 6" stroke="#71717a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Step 4 -->
+  <g transform="translate(932, 74)">
+    <rect x="0" y="0" width="228" height="148" rx="13" fill="#17221e" stroke="#285343"/>
+    <rect x="16" y="16" width="60" height="22" rx="11" fill="#1f3a30"/>
+    <text x="46" y="31" text-anchor="middle" fill="#6ee7b7" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11" font-weight="600">NATIVE</text>
+    <text x="16" y="64" fill="#fafafa" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="600">全链路原生同步生效</text>
+    <text x="16" y="90" fill="#a7f3d0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12.5">
+      <tspan x="16" dy="0">· 文件工具、cd 与终端环境</tspan>
+      <tspan x="16" dy="20">· 对话相对路径链接与文件树</tspan>
+      <tspan x="16" dy="20">· 子代理自动继承目录与约定</tspan>
+    </text>
+  </g>
+
+  <!-- Bottom Strip -->
+  <g transform="translate(40, 246)">
+    <rect x="0" y="0" width="1120" height="52" rx="12" fill="#1a1a1e" stroke="#2c2c33"/>
+    <circle cx="24" cy="26" r="4.5" fill="#34d399"/>
+    <text x="40" y="30.5" fill="#d4d4d8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13">
+      <tspan font-weight="600" fill="#fafafa">会话归属不乱跑：</tspan>
+      <tspan font-family="ui-monospace, SFMono-Regular, Consolas, monospace" fill="#e4e4e7">session.header.cwd</tspan>
+      <tspan> 始终保持为默认工作区根目录，左侧边栏分组整洁如初；不写入 </tspan>
+      <tspan font-family="ui-monospace, SFMono-Regular, Consolas, monospace" fill="#e4e4e7">cordis.patch.yml</tspan>
+      <tspan>，默认状态零外部配置文件。</tspan>
+    </text>
+  </g>
+</svg>

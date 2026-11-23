@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" fill="none">
+  <defs>
+    <linearGradient id="canvas" x1="0" y1="0" x2="1200" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#141416"/>
+      <stop offset="100%" stop-color="#121214"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Frame -->
+  <rect x="0.5" y="0.5" width="1199" height="429" rx="18" fill="url(#canvas)" stroke="#2b2b30"/>
+
+  <!-- Top Header -->
+  <text x="40" y="42" fill="#fafafa" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600">目录结构对比：装插件前 vs 装插件后</text>
+  <text x="1160" y="42" text-anchor="end" fill="#8e8e98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13">侧边栏会话仍统一归属在默认工作区下，磁盘目录自动按会话隔离</text>
+
+  <!-- Left Card: BEFORE -->
+  <g transform="translate(40, 68)">
+    <rect x="0" y="0" width="530" height="326" rx="14" fill="#1a1a1d" stroke="#2d2d33"/>
+    <!-- Card Header -->
+    <rect x="18" y="16" width="84" height="24" rx="12" fill="#2c1d1f" stroke="#5c2c31"/>
+    <text x="60" y="32" text-anchor="middle" fill="#fca5a5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600">装插件前</text>
+    <text x="114" y="32.5" fill="#d4d4d8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="500">所有无项目会话共用同一个根目录</text>
+    <line x1="1" y1="54" x2="529" y2="54" stroke="#29292f"/>
+
+    <!-- Messy Root Tree -->
+    <g transform="translate(24, 74)" font-family="ui-monospace, SFMono-Regular, 'Cascadia Code', Consolas, monospace" font-size="13">
+      <text x="0" y="14" fill="#fafafa" font-weight="600">default-workspace/</text>
+      <line x1="8" y1="24" x2="8" y2="186" stroke="#32323a" stroke-width="1.2"/>
+
+      <g transform="translate(22, 34)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#32323a" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#d4d4d8">test.py</text>
+        <text x="230" y="0" fill="#7c7c86" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">← 上周会话 A 的临时脚本</text>
+      </g>
+      <g transform="translate(22, 62)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#32323a" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#d4d4d8">output.png</text>
+        <text x="230" y="0" fill="#7c7c86" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">← 会话 B 生成，容易被同名覆盖</text>
+      </g>
+      <g transform="translate(22, 90)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#32323a" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#d4d4d8">temp_data.csv</text>
+        <text x="230" y="0" fill="#7c7c86" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">← 中间缓存，不知属于哪段对话</text>
+      </g>
+      <g transform="translate(22, 118)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#32323a" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#d4d4d8">report_final_v2.md</text>
+        <text x="230" y="0" fill="#7c7c86" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">← 交付物与草稿混在一起</text>
+      </g>
+      <g transform="translate(22, 146)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#32323a" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#d4d4d8">scratch.ps1</text>
+        <text x="230" y="0" fill="#7c7c86" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">← 残留脚本越来越多</text>
+      </g>
+      <g transform="translate(22, 174)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#32323a" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#71717a">... 几十个未归类的杂项文件</text>
+      </g>
+    </g>
+
+    <!-- Bottom Warning Note -->
+    <rect x="18" y="274" width="494" height="34" rx="8" fill="#221c1d" stroke="#452b2e"/>
+    <text x="34" y="295" fill="#fca5a5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12.5">痛点：文件互相污染、同名覆盖、事后很难按对话回溯和清理</text>
+  </g>
+
+  <!-- Center Arrow -->
+  <g transform="translate(580, 214)">
+    <circle cx="20" cy="18" r="18" fill="#232329" stroke="#383842"/>
+    <path d="M13 18h14m0 0l-5-5m5 5l-5 5" stroke="#fafafa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Right Card: AFTER -->
+  <g transform="translate(630, 68)">
+    <rect x="0" y="0" width="530" height="326" rx="14" fill="#1a1a1d" stroke="#34343c"/>
+    <!-- Card Header -->
+    <rect x="18" y="16" width="84" height="24" rx="12" fill="#182b24" stroke="#285846"/>
+    <text x="60" y="32" text-anchor="middle" fill="#6ee7b7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600">装插件后</text>
+    <text x="114" y="32.5" fill="#fafafa" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="500">按日期与会话自动隔离，默认附带 work / outputs</text>
+    <line x1="1" y1="54" x2="529" y2="54" stroke="#29292f"/>
+
+    <!-- Clean Tree -->
+    <g transform="translate(24, 74)" font-family="ui-monospace, SFMono-Regular, 'Cascadia Code', Consolas, monospace" font-size="13">
+      <text x="0" y="14" fill="#fafafa" font-weight="600">default-workspace/</text>
+      <line x1="8" y1="24" x2="8" y2="184" stroke="#34343e" stroke-width="1.2"/>
+
+      <!-- Date 1 -->
+      <g transform="translate(22, 34)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#34343e" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#e4e4e7" font-weight="600">2026-11-23/</text>
+      </g>
+      <line x1="32" y1="44" x2="32" y2="152" stroke="#34343e" stroke-width="1.2"/>
+
+      <!-- Session A -->
+      <g transform="translate(46, 62)">
+        <rect x="-4" y="-16" width="440" height="24" rx="6" fill="#24242a" stroke="#383842"/>
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#34343e" stroke-width="1.2"/>
+        <circle cx="8" cy="-4" r="3" fill="#34d399"/>
+        <text x="20" y="0" fill="#ffffff" font-weight="600">session-8f3c...a1b2/</text>
+        <text x="424" y="-0.5" text-anchor="end" fill="#8e8e98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11.5">会话 A 独立工作目录</text>
+      </g>
+      <line x1="56" y1="74" x2="56" y2="118" stroke="#3d3d48" stroke-width="1.2"/>
+
+      <g transform="translate(70, 92)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#3d3d48" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#d4d4d8">work/</text>
+        <text x="98" y="0" fill="#8e8e98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">临时脚本与中间文件（可关）</text>
+      </g>
+      <g transform="translate(70, 118)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#3d3d48" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#d4d4d8">outputs/</text>
+        <text x="98" y="0" fill="#8e8e98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">最终交付产物（可关）</text>
+      </g>
+
+      <!-- Session B -->
+      <g transform="translate(46, 150)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#34343e" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#d4d4d8">session-4d19...e70c/</text>
+        <text x="230" y="0" fill="#7c7c86" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">← 会话 B 互不干扰</text>
+      </g>
+
+      <!-- Date 2 -->
+      <g transform="translate(22, 182)">
+        <line x1="-14" y1="-4" x2="-4" y2="-4" stroke="#34343e" stroke-width="1.2"/>
+        <text x="4" y="0" fill="#9a9aa4">2026-11-24/</text>
+        <text x="148" y="0" fill="#71717a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">← 次日新会话自动新建日期目录</text>
+      </g>
+    </g>
+
+    <!-- Bottom Benefit Note -->
+    <rect x="18" y="274" width="494" height="34" rx="8" fill="#17241f" stroke="#254c3d"/>
+    <text x="34" y="295" fill="#6ee7b7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12.5">体验：一会话一文件夹，子代理自动继承，其他项目工作区完全不受影响</text>
+  </g>
+</svg>

@@ -1,59 +1,101 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/HelloWorldGitHub114/dsh-codex-default-workspace/main/assets/banner.svg" alt="dsh-codex-default-workspace" width="100%">
+</p>
+
+<div align="center">
+
 # dsh-codex-default-workspace
 
-English | [简体中文](README.md)
+**Codex-style per-session directory isolation for DeepSeek Harness's default workspace**
 
-A [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) plugin that brings Codex-style project-free session isolation to DSH's default workspace: each new session inside the default workspace automatically gets its own date-grouped directory on first run instead of cluttering the workspace root.
+[简体中文](README.md) · English
+
+[![npm version](https://img.shields.io/npm/v/dsh-codex-default-workspace?style=flat-square&color=18181b&labelColor=27272a)](https://www.npmjs.com/package/dsh-codex-default-workspace)
+[![npm downloads](https://img.shields.io/npm/dt/dsh-codex-default-workspace?style=flat-square&color=18181b&labelColor=27272a)](https://www.npmjs.com/package/dsh-codex-default-workspace)
+[![License: MIT](https://img.shields.io/badge/License-MIT-18181b?style=flat-square&labelColor=27272a)](LICENSE)
+[![Node.js >=20](https://img.shields.io/badge/Node.js-%3E%3D20-18181b?style=flat-square&labelColor=27272a)](https://nodejs.org/)
+[![DSH Plugin](https://img.shields.io/badge/DeepSeek%20Harness-Plugin-18181b?style=flat-square&labelColor=27272a)](https://github.com/deepseek-ai/deepseek-harness)
+
+</div>
+
+> A community plugin for [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) that brings Codex-style project-free sessions to your **default workspace**: each new session automatically gets its own date-grouped directory (`YYYY-MM-DD/<session-id>/`) on first run instead of cluttering the root folder.
+
+---
+
+## Before vs After
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/HelloWorldGitHub114/dsh-codex-default-workspace/main/assets/before-after-en.svg" alt="Directory layout before and after installing the plugin" width="100%">
+</p>
 
 ## Features
 
-- **Automatic Per-Session Directory**: On first working-directory access, each brand-new session in the default workspace creates `<default-workspace>/YYYY-MM-DD/<session-id>/`.
-- **100% Native DSH Behavior**: Keeps `session.header.cwd` pointed at the default workspace root (so sessions remain grouped under the default workspace in the sidebar) while emitting a native `working-directory/change` event:
-  - File tools (`read`, `write`, `edit`, `glob`, `grep`), `bash`/`pwsh`, and terminals run directly inside the session folder;
-  - Relative and absolute `working_directory` (`cd`) changes work natively;
-  - Relative file links and references in chat open directly;
-  - Right sidebar file trees and system runtime context stay in sync.
-- **Built-in `work/` & `outputs/` Convention (Enabled by Default, Toggleable)**: Automatically creates `work/` and `outputs/` inside new session folders and adds a concise reminder for both the parent agent and subagents running inside the session directory tree to separate scratch files from deliverables (can be disabled in Settings; non-default workspaces never receive this prompt).
-- **Scoped & Non-Intrusive**:
-  - Other workspaces are untouched;
-  - Existing multi-turn sessions in the root workspace keep their original working directory;
-  - Subagents inherit the parent session folder without creating extra nested folders.
-- **Clean Persistence & One-Click Reset**:
-  - Does not write plugin configuration into host `cordis.patch.yml` (changes apply immediately without restarting the plugin);
-  - Creates no external config file while using defaults; persists non-default settings in `~/.dsh/storages/codex-default-workspace.json` so plugin updates preserve your choices;
-  - Clicking **Reset to defaults & remove config file** in settings or running `/codex-default-workspace-clear` removes `~/.dsh/storages/codex-default-workspace.json` completely.
+- **Automatic Per-Session Folders**: On first working-directory access, each new session in the default workspace creates and enters `<default-workspace>/YYYY-MM-DD/<session-id>/`.
+- **Built-in `work/` & `outputs/` Convention (Enabled by Default, Toggleable)**: Automatically creates `work/` (scratch scripts and intermediate files) and `outputs/` (final deliverables), and adds a brief reminder for both the main session and subagents inside the session tree. Other workspaces are never touched.
+- **100% Native DSH Behavior**: Keeps `session.header.cwd` at the default workspace root (so sidebar grouping stays intact) while emitting a native `working-directory/change` event—file tools, `cd`, shell terminals, relative chat links, and the file tree all sync natively.
+- **Scoped & Non-Intrusive**: Project workspaces stay untouched; existing multi-turn sessions in the default workspace keep their original cwd; subagents inherit the parent session directory without creating nested folders.
+- **Zero-Bloat Persistence & One-Click Reset**: Never edits host `cordis.patch.yml` (changes apply immediately); creates **no external config file** while using defaults, stores custom settings in `~/.dsh/storages/codex-default-workspace.json`, and supports one-click cleanup.
 
-## Directory Layout
+## How It Works
 
-```text
-<default-workspace>/
-└─ 2026-11-16/
-   └─ session-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/
-      ├─ work/       # Scratch files & temporary scripts (created by default, toggleable)
-      └─ outputs/    # Final deliverables (created by default, toggleable)
-```
+<p align="center">
+  <img src="https://raw.githubusercontent.com/HelloWorldGitHub114/dsh-codex-default-workspace/main/assets/flow-en.svg" alt="Native DSH working-directory event flow" width="100%">
+</p>
 
-## Default Workspace Resolution Order
+<details>
+<summary>Default workspace resolution order & technical details</summary>
 
-1. Explicit workspace selected by the user (via workspace context menu **"Set as default workspace"** or Settings);
-2. DSH native `defaultWorkspaceId` (if the workspace still exists);
-3. A workspace titled `默认工作区` / `default-workspace` / `Default workspace`, or whose folder is named `default-workspace`.
+### Default Workspace Resolution Order
+
+The plugin resolves the default workspace in the following order (always matched by internal workspace ID so renaming never breaks it):
+
+1. Explicit workspace selected by the user (via sidebar context menu or Settings);
+2. DSH native `defaultWorkspaceId` (when that workspace still exists);
+3. A workspace titled `默认工作区` / `default-workspace` / `Default workspace`, or whose folder name is `default-workspace`.
+
+If none is found, the plugin stays idle and shows a one-time guidance notice.
+
+### Native Event Design
+
+- Hooks `working-directory/access` for brand-new parent sessions in the default workspace, creates the session folder on disk, and appends a native `working-directory/change` event before delegating to DSH's built-in `WorkingDirectoryService`.
+- After disabling or uninstalling, new sessions use the default workspace root directly while existing sessions retain their folders and files.
+
+</details>
 
 ## Installation
 
-- **DSH Plugin Market**: Search for and install `dsh-codex-default-workspace`.
-- **CLI**:
+### Option 1: DSH Plugin Market (Recommended)
+
+Search for `dsh-codex-default-workspace` in the DSH Plugin Market and install it directly.
+
+### Option 2: Ask Your Agent to Install
+
+Send this prompt to an Agent with terminal access:
+
+```text
+Please install dsh-codex-default-workspace into my active DSH profile and let me know when to reload.
+```
+
+### Option 3: CLI
 
 ```sh
+# Replace <profile> with your active profile (e.g., desktop or web)
 dsh plugin --profile <profile> add dsh-codex-default-workspace
+
 # Or install directly from GitHub
 dsh plugin --profile <profile> add HelloWorldGitHub114/dsh-codex-default-workspace
 ```
 
 ## Settings & Clean Uninstall
 
-Configure via workspace context menu, **Settings → Default workspace**, or the plugin details card.
+| Entry Point | Actions |
+| --- | --- |
+| **Sidebar Workspace Context Menu (`···`)** | One-click **Set as default workspace** |
+| **Settings → Default workspace** | Pick default workspace, toggle `work / outputs` convention, or reset & remove config file |
+| **Plugins → Plugin Details Card** | Shares the same live settings panel; changes apply immediately without restart |
+| **Slash Command `/codex-default-workspace-clear`** | Deletes `~/.dsh/storages/codex-default-workspace.json` and restores defaults |
 
-Before uninstalling, you can click **Reset to defaults & remove config file** in Settings or run `/codex-default-workspace-clear` to remove `~/.dsh/storages/codex-default-workspace.json` (created folders and session logs are always kept). After disabling or uninstalling, new sessions use the root workspace directly while existing sessions retain their folders.
+> Resetting settings or uninstalling the plugin **never** deletes created folders on disk or session history.
 
 ## License
 
